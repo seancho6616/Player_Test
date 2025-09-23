@@ -25,5 +25,8 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log(value.Get<Vector2>());
 
     }
-    
+    void OnAttack()
+    {
+        Debug.Log("Attack");
+    } 
 }
