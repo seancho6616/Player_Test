@@ -6,7 +6,7 @@ public class MonsterAttack : MonoBehaviour
 {
     public Transform player;
     public float moveSpeed = 2f;
-    public float attackRange = 3.5f;   // »ç°Å¸®¸¦ ³Ë³ËÈ÷
+    public float attackRange = 3.5f;   // ì‚¬ê±°ë¦¬ë¥¼ ë„‰ë„‰íˆ
     public int attackDamage = 10;
     public float attackCooldown = 1.0f;
 
@@ -16,24 +16,24 @@ public class MonsterAttack : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.isKinematic = true; // ¸ó½ºÅÍ´Â ¹°¸® ¿µÇâ ¾È ¹Ş°í Á¦ÀÚ¸® À¯Áö
+        rb.isKinematic = true; // ëª¬ìŠ¤í„°ëŠ” ë¬¼ë¦¬ ì˜í–¥ ì•ˆ ë°›ê³  ì œìë¦¬ ìœ ì§€
 
-        // Collider È®ÀÎ
+        // Collider í™•ì¸
         Collider col = GetComponent<Collider>();
-        if (col != null) col.isTrigger = false; // ÇÃ·¹ÀÌ¾î°¡ ¾ÈÀ¸·Î µé¾î°¡Áö ¾Êµµ·Ï
+        if (col != null) col.isTrigger = false; // í”Œë ˆì´ì–´ê°€ ì•ˆìœ¼ë¡œ ë“¤ì–´ê°€ì§€ ì•Šë„ë¡
     }
 
     void FixedUpdate()
     {
         if (player == null) return;
 
-        // ¸ó½ºÅÍ¿Í ÇÃ·¹ÀÌ¾î »çÀÌ °Å¸® °è»ê
+        // ëª¬ìŠ¤í„°ì™€ í”Œë ˆì´ì–´ ì‚¬ì´ ê±°ë¦¬ ê³„ì‚°
         float distance = Vector3.Distance(transform.position, player.position);
 
-        // °Å¸® Debug
+        // ê±°ë¦¬ Debug
         Debug.DrawLine(transform.position, player.position, Color.red);
 
-        // ÀÌµ¿
+        // ì´ë™
         if (distance > attackRange)
         {
             Vector3 newPos = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.fixedDeltaTime);
@@ -41,7 +41,7 @@ public class MonsterAttack : MonoBehaviour
         }
         else
         {
-            // °ø°İ
+            // ê³µê²©
             if (Time.time >= lastAttackTime + attackCooldown)
             {
                 Attack();
@@ -52,7 +52,7 @@ public class MonsterAttack : MonoBehaviour
 
     void Attack()
     {
-        Debug.Log("¸ó½ºÅÍ°¡ ÇÃ·¹ÀÌ¾î¸¦ °ø°İ!");
+        Debug.Log("ëª¬ìŠ¤í„°ê°€ í”Œë ˆì´ì–´ë¥¼ ê³µê²©!");
         PlayerHealth health = player.GetComponent<PlayerHealth>();
         if (health != null)
         {
@@ -60,7 +60,7 @@ public class MonsterAttack : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("PlayerHealth ÄÄÆ÷³ÍÆ®°¡ ¾øÀ½!");
+            Debug.LogWarning("PlayerHealth ì»´í¬ë„ŒíŠ¸ê°€ ì—†ìŒ!");
         }
     }
 }
